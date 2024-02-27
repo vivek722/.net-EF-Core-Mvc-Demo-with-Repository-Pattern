@@ -4,6 +4,7 @@
 // Write your JavaScript code.
 Skillarray = [];
 $("#btnAddDataList").click(function () {
+    debugger
     let dataList = $("#txtAddDataList").val();
     Skillarray.push(dataList);
     $('ul').append('<li>' + dataList + '<span><i class="fa-solid fa-xmark" id="deleteIcon" style="color: #000000;"></i></span></li>')
@@ -11,8 +12,17 @@ $("#btnAddDataList").click(function () {
     $("#txtAddDataList").val("");
 });
 $('ul').on("click", "span", function () {
+    debugger
     let removeSkill = $(this).parent('li').text();
     Skillarray.splice(Skillarray.indexOf(removeSkill), 1)
     $(this).parent('li').remove();
     $("#Skill_Name").val(Skillarray);
 });
+
+function skillAdd(item) {
+    debugger
+    let dataList = item;
+    $("#skills").append('<li>' + dataList + '<span><i class="fa-solid fa-xmark" id="deleteIcon" style="color: #000000;"></i></span></li>')
+    Skillarray.push(dataList);
+    $("#txtAddDataList").val("");
+}

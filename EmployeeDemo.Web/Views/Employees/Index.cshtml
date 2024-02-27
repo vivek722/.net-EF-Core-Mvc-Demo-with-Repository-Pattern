@@ -29,19 +29,7 @@
 
             <th>
                 @Html.DisplayNameFor(Model => Model.Designation)
-            </th>
-            @*  <th>
-            @Html.DisplayNameFor(Model => Model.DOB)
-            </th>
-            <th>
-            @Html.DisplayNameFor(Model => Model.JoiningDate)
-            </th>
-            <th>
-            @Html.DisplayNameFor(Model => Model.Image)
-            </th>
-            <th>
-            @Html.DisplayNameFor(Model => Model.Description)
-            </th> *@
+            </th>          
             <th>
                 Action
             </th>
@@ -84,7 +72,7 @@
                 <td>@Html.LabelFor(Model => i.Description):- @Html.DisplayFor(Model => i.Description)</td>
 
                 <td>@Html.LabelFor(Model => i.Skill_Name):- @Html.DisplayFor(Model => i.Skill_Name)</td>
-            </tr> *@
+            </tr>  *@
         }
     </tbody>
 
@@ -105,5 +93,5 @@
         <a asp-controller="Employees" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-light mx-2">
         <i class="fa-sharp fa-solid fa-trash" style="color: #000000;"></i>
         </a>
-        @* <button class="btn" asp-action="Delete" asp-route-id="@i.Id" onclick="deleteDailog(event,@i.Id)"><i class="fa-sharp fa-solid fa-trash" style="color: #000000;"></i></button> *@
+        @* <button class="btn" asp-action="Delete" asp-route-id="@i.Id" onclick="deleteDailog(event,@i.Id)"><i class="fa-sharp fa-solid fa-trash" style="color: #000000;"></i></button>
 @* @Html.ActionLink("", "Delete", null, new { id = i.Id }, new { @class = "fa-solid fa-trash", @style = "color: #000000;"}) *@
