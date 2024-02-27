@@ -1,0 +1,167 @@
+﻿@using EmployeeDemo.Web.Models;
+@model EmployeeDto
+
+<form method="post" enctype="multipart/form-data">
+    @* <div class="modal" id="myModal">
+    <div class="modal-dialog modal-lg"> *@
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <h4 class="modal-title">Update Empolyee</h4>
+            <button asp-controller="Employees" asp-action="Index" class="close" id="closeModel">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+
+            <div class="row g-3">
+                <div class="oneline col-md-6">
+                    <input type="hidden" id="hidden">
+                    <div class="col-md-3">
+                        @Html.LabelFor(Model => Model.First_Name)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(Model => Model.First_Name)
+
+                    </div>
+                </div>
+
+                <div class="oneline col-md-6">
+                    <div class="col-md-3">
+                        @Html.LabelFor(Model => Model.Last_Name)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(Model => Model.Last_Name)
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="oneline col-md-6">
+                    <div class="col-md-3">
+                        @Html.LabelFor(model => model.Email)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(Model => Model.Email)
+
+                    </div>
+
+                </div>
+
+                <div class="oneline col-md-6">
+                    <div class="col-md-3">
+                        @Html.LabelFor(Model => Model.Gender)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.RadioButtonFor(Model => Model.Gender, "Male") Male
+                        @Html.RadioButtonFor(Model => Model.Gender, "Female") Female
+                    </div>
+                </div>
+            </div>
+
+
+            <div class=" row mt-3">
+                <div class="oneline col-md-6">
+                    <div class="col-md-3">
+                        @Html.LabelFor(Model => Model.DOB)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(Model => Model.DOB)
+
+                    </div>
+                </div>
+
+                <div class="oneline col-md-6">
+                    <div class="col-md-3">
+                        @Html.LabelFor(Model => Model.JoiningDate)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(Model => Model.JoiningDate)
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row mt-3 ">
+                <div class="oneline col-md-6">
+                    <div class="col-md-3">
+                        @Html.LabelFor(Model => Model.Designation)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(Model => Model.Designation,
+                                 new SelectList(Enum.GetValues(typeof(Designation))),
+                                 "--Please choose an Designation--")
+
+                    </div>
+                </div>
+
+                <div class="oneline col-md-6 ">
+                    <div class="col-md-3">
+                        @Html.LabelFor(Model => Model.Image)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.HiddenFor(Model => Model.Image)
+                        @Html.TextBoxFor(Model => Model.Image, null, new { Type = "file", @class = "form-control form-control-md", id = "uploadedImage" })
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3 ">
+                <div class=" col-md-6">
+                    <div class="col-md-12" id="img-div">
+                        <img src="~/uploads/@Model.Image" id="preview" alt="Image" style="width:150px; height:150px; margin-left:800px;">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="oneline col-md-6">
+                        <div class="col-md-3">
+                            <label for="">Skill</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input placeholder="Enter your skills" type="text" name="skilldata" id="txtAddDataList">
+                            <input type="button" value="Add" id="btnAddDataList">
+                            @Html.HiddenFor(Model => Model.Skill_Name)
+                            <div>
+                                <ul class="text" id="skills">
+                                    @foreach (var item in Model.skillList)
+                                    {                                                                                
+                                        <script>skillAdd('@item')</script>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="oneline col-md-6">
+                        <div class="col-md-3">
+                            @Html.LabelFor(Model => Model.Description)
+                        </div>
+                        <div class="col-md-9">
+                            @Html.TextAreaFor(Model => Model.Description)
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary sucsess" id="saveData">Update changes</button>
+                    @* @Html.TextBox("btnSubmit", "save", new { type = "submit", @class = "btn btn-primary sucsess" })
+                    @* <input type="hidden" id="hiddenField" value=""> *@
+                    <button asp-controller="Employees" asp-action="Index" class="btn btn-danger close" id="closeModel">Close</button>
+                </div>
+            </div>
+        </div>
+        @*     </div>
+        </div>
+        *@
+</form>
+
+@section scripts {
+    <script src="~/js/imagepreview.js"></script>
+}
+
+
+
+
+

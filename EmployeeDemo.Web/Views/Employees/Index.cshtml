@@ -1,0 +1,109 @@
+﻿@using EmployeeDemo.Web.Models;
+@model IEnumerable<EmployeeDto>
+@{
+    ViewData["Title"] = "Index";
+}
+@* <p>
+    <a asp-action="Index">Display Data</a>
+</p> *@
+
+<table id="datatabledata" class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>
+            </th>
+            <th>
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(Model => Model.Id)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(Model => Model.First_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(Model => Model.Gender)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(Model => Model.Designation)
+            </th>
+            @*  <th>
+            @Html.DisplayNameFor(Model => Model.DOB)
+            </th>
+            <th>
+            @Html.DisplayNameFor(Model => Model.JoiningDate)
+            </th>
+            <th>
+            @Html.DisplayNameFor(Model => Model.Image)
+            </th>
+            <th>
+            @Html.DisplayNameFor(Model => Model.Description)
+            </th> *@
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr class="table-bordered">
+                <td>
+                    <button class="btn" data-bs-toggle='collapse' data-bs-target=#detail_@Html.DisplayFor(Model => i.Id) aria-expanded='false' aria-controls=detail_@Html.DisplayFor(Model => i.Id)><i class="fa-solid fa-circle-plus fa-flip-vertical" style="color: #000000;"></i></button>
+                </td>
+
+                <td>
+                    <img src="~/uploads/@i.Image" class="rounded-circle" height="50px;" width="50px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => i.First_Name)@Html.DisplayFor(Model => i.Last_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => i.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => i.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(Model => i.Designation)
+                </td>
+                <td>
+                    @Html.ActionLink("", "Update", null, new { id = i.Id }, new { @class = "fa-solid fa-user-pen mx-3 ", @style = "color: #000000;" })
+                    <a class="btn" onclick=deleteDailog('/employees/delete/@i.Id')> <i class="fa-sharp fa-solid fa-trash" style="color: #000000;"></i></a>
+                </td>
+            </tr>
+           @*  <tr class="collapse" id=detail_@Html.DisplayFor(Model => i.Id) style="width: 100%;">
+
+                <td>@Html.LabelFor(Model => i.DOB):- @Html.DisplayFor(Model => i.DOB)</td>
+
+                <td>@Html.LabelFor(Model => i.JoiningDate):- @Html.DisplayFor(Model => i.JoiningDate)</td>
+
+                <td>@Html.LabelFor(Model => i.Description):- @Html.DisplayFor(Model => i.Description)</td>
+
+                <td>@Html.LabelFor(Model => i.Skill_Name):- @Html.DisplayFor(Model => i.Skill_Name)</td>
+            </tr> *@
+        }
+    </tbody>
+
+</table>
+
+
+@section Scripts {
+    <script src=" ~ /js/pagination.js"></script>
+}
+
+@*<a asp-controller="Employees" asp-action="Update" asp-route-id="@i.Id" class="btn btn-light mx-2">
+        <i class="fa-solid fa-pen" style="color: #000000;"></i>
+        </a>
+        @Html.ActionLink("",
+        "Delete", new { id = i.Id },
+        new { @class = "a-sharp fa-solid fa-trash", @style = "color: #000000;", onclick = "return confirm('Do you really want to delete this Data " + i.Id + "?')" })
+
+        <a asp-controller="Employees" asp-action="Delete" asp-route-id="@i.Id" class="btn btn-light mx-2">
+        <i class="fa-sharp fa-solid fa-trash" style="color: #000000;"></i>
+        </a>
+        @* <button class="btn" asp-action="Delete" asp-route-id="@i.Id" onclick="deleteDailog(event,@i.Id)"><i class="fa-sharp fa-solid fa-trash" style="color: #000000;"></i></button> *@
+@* @Html.ActionLink("", "Delete", null, new { id = i.Id }, new { @class = "fa-solid fa-trash", @style = "color: #000000;"}) *@

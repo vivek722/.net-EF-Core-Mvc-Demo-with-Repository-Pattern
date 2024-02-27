@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Employees</title>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/datatablecss/datatables.jqueryui.min.css" rel="stylesheet" />
+    <link href="~/datatablecss/datatables.jqueryui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Employee.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Employees.styles.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" asp-append-version="true" />   
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/pagination.js"></script>
+    <script src="~/js/updateskill.js"></script>
+    
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid" style="background-color: aqua;">
+                <a class="navbar-brand" href="#">Employees</a>
+                <form class="d-flex" role="search" id="modelForm">
+                    <input class="form-control me-2" style="width: 300px; margin-left: 700px;" type="search" placeholder="Search Your Data" id="searchbar" name="searchData" aria-label="Search">
+                    <button class="btn btn-outline-success " type="submit" asp-controller="Employees" asp-action="Index" id="searchUserData"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i></button>                   
+                </form>
+                <form>
+                 <button asp-controller="Employees" asp-action="Insert" class="adduser ms-3" name="" style="width: 300px;" id="openModel"><i class="fa-solid fa-user-plus" style="color: #000000;"></i>  Add New Employee</button>
+                </form>
+
+            </div>
+            
+        </nav>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+           @*  <part *@
+            @RenderBody()
+
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Employees - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/js/commen.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="~/datatable/datatables.js"></script>
+    <script src="~/datatable/datatables.min.js"></script>   
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
