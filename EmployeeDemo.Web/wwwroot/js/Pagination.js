@@ -5,7 +5,7 @@ $(document).ready(function () {
 });
 
 function dataTable() {   
-    $.ajax({
+     $.ajax({
         url: '/Employees/getAll',
         type: "GET",
         datatype: "json",
@@ -13,7 +13,7 @@ function dataTable() {
     });
 }
 function onSuccess(response) {  
-    $("#DataTable").DataTable({         
+    var table = $("#DataTable").DataTable({         
         bLengthChange: false,
         lengthMenu: [[3, 5, 10, -1], [3, 5, 10, "All"]],     
         searching: false,      
@@ -22,7 +22,7 @@ function onSuccess(response) {
             {
                 data: 'icon',
                 render: function (data, type, row, meta) {
-                    return '<Button class="btn"><i class="fa-solid fa-circle-plus fa-flip-vertical" style="color: #000000;"></i></Button>'
+                    return '<Button class="btn detail"><i class="fa-solid fa-circle-plus fa-flip-vertical" style="color: #000000;"></i></Button>'
                 }
             },
             {
@@ -59,12 +59,44 @@ function onSuccess(response) {
             {
                 data: 'Action',
                 render: function (data, type, row, meta) {
-                    return '<a href="/employees/update/' + row.id + '"><i class="fa-solid fa-user-pen mx-3" style="color: #000000;"></i></a >' + " " + ' <a class="btn" onclick="deleteDailog(/employees/delete/' + row.id +')"> <i class="fa-solid fa-trash" style="color: #000000;"></i></a > ' 
+                    return '<a href="/employees/update/' + row.id + '"><i class="fa-solid fa-user-pen mx-3" style="color: #000000;"></i></a >' + " " + ' <a  class="btn" onclick="deleteDailog(/employees/delete/' + row.id +')"> <i class="fa-solid fa-trash" style="color: #000000;"></i></a > ' 
                 }
             }           
         ]
         
     });
+    $("#DataTable").on('click', '.detail', function (e) {
+        let tr = e.target.closest('tr');
+        let row = table.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+        }
+        else {
+            // Open this row
+            row.child(format(row.data())).show();
+        }
+    });
+}
+function format(d) {
+    // `d` is the original data object for the row
+    return (
+        '<dl>' +
+        '<dt>DOB:</dt>' +
+        '<dd>' +
+        d.dob +
+        '</dd>' +
+        '<dt>Joining Date:</dt>' +
+        '<dd>' +
+        d.joiningDate +
+        '</dd>' +
+        '<dt>Description:</dt>' +
+        '<dd>' + d.description + '</dd>' +
+        '<dt>Skills:</dt>' +
+        '<dd>'+d.skill_Name +'</dd>' +
+        '</dl>'
+    );
 }
 
 
