@@ -82,20 +82,16 @@ function onSuccess(response) {
 function format(d) {
     // `d` is the original data object for the row
     return (
-        '<dl>' +
-        '<dt>DOB:</dt>' +
-        '<dd>' +
-        d.dob +
-        '</dd>' +
-        '<dt>Joining Date:</dt>' +
-        '<dd>' +
-        d.joiningDate +
-        '</dd>' +
-        '<dt>Description:</dt>' +
-        '<dd>' + d.description + '</dd>' +
-        '<dt>Skills:</dt>' +
-        '<dd>'+d.skill_Name +'</dd>' +
-        '</dl>'
+       '<tr>'+        
+        '<th>DOB:</th>' +
+        '<td class="px-3">' + d.dob + '</td>' +
+        '<th>Joining Date:</th>' +
+        '<td class="px-3">' + d.joiningDate + '</td>' +
+        '<th>Description:</th>' +
+        '<td class="px-3">' + d.description + '</td>' +
+        '<th>Skills:</th>' +
+        '<td>'+d.skill_Name +'</td>' +
+        '</tr>'
     );
 }
 
