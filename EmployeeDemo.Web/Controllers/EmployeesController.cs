@@ -198,7 +198,7 @@ namespace EmployeeDemo.Web.Controllers
         {
             var Employees = await employeesService.GetEmployees();
             var EmployeesMapper = _mapper.Map<List<EmployeeDto>>(Employees);
-            return Json(new { data = EmployeesMapper });
+            return new JsonResult(EmployeesMapper);
         }
         #endregion
     }

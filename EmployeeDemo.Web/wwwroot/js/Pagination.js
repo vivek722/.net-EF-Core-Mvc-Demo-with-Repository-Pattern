@@ -1,98 +1,70 @@
-﻿$(document).ready(function () {
+﻿
+$(document).ready(function () {
 
-    //dataTable();
-    $("#datatabledata").DataTable({
-        bprocessing: true,
-        bLengthChange: false,
-        lengthMenu: [[3, 5, 10, -1], [3, 5, 10, "All"]],
-        bfilter: false,
-        bSort: false,
-        searching: false,
-        bPaginate: true
-
-    });
+    dataTable();
 });
 
-//function dataTable() {
-//    debugger
-//    $("#datatabledata").DataTable({
-//        "ajax":
-//        {
-//            url : '/Employees/getAll',
-//            type: "GET",
-//            datatype: "json",
-//            success: onSuccess
-//        }
-//    });
-//    }
-//function onSuccess(response) {
-//    debugger
-//        $("#datatabledata").DataTable({
-//            bprocessing: true,
-//            bLengthChange: false,
-//            lengthMenu: [[3, 5, 10, -1], [3, 5, 10, "All"]],
-//            bfilter: false,
-//            bSort: false,
-//            searching: false,
-//            bPaginate: true,
-//            data: response,
-//            columns: [
-//                //{
-//                //    data: 'Id',
-//                //    render: function (data, type, row, meta) {
-//                //        return row.Id
-//                //    }
-//                //},
-//                {
-//                    data: 'First_Name',
-//                    render: function (data, type, row, meta) {
-//                        return row.first_Name
-//                    }
-//                   },
-//                //{
-//                //    data: 'Last_Name',
-//                //    render: function (data, type, row, meta) {
-//                //        return row.Last_Name
-//                //    }
-//                //},
-//                {
-//                    data: 'Email',
-//                    render: function (data, type, row, meta) {
-//                        return row.email
-//                    }
-//                },
-//                {
-//                    data: 'Gender',
-//                    render: function (data, type, row, meta) {
-//                        return row.gender
-//                    }
-//                },
-//                //{
-//                //    data: 'Designation',
-//                //    render: function (data, type, row, meta) {
-//                //        return row.Designation
-//                //    }
-//                //},
-//                //{
-//                //    data: 'Image',
-//                //    render: function (data, type, row, meta) {
-//                //        return row.Image
-//                //    }
-//                //},
-//                //{
-//                //    data: 'Description',
-//                //    render: function (data, type, row, meta) {
-//                //        return row.Description
-//                //    }
-//                //},
-//                //{
-//                //    data: 'Skill_Name',
-//                //    render: function (data, type, row, meta) {
-//                //        return row.Skill_Name
-//                //    }
-//                //}
-//            ]
-//        });
-//    }
+function dataTable() {   
+    $.ajax({
+        url: '/Employees/getAll',
+        type: "GET",
+        datatype: "json",
+        success: onSuccess
+    });
+}
+function onSuccess(response) {  
+    $("#DataTable").DataTable({         
+        bLengthChange: false,
+        lengthMenu: [[3, 5, 10, -1], [3, 5, 10, "All"]],     
+        searching: false,      
+        data: response,
+        columns: [
+            {
+                data: 'icon',
+                render: function (data, type, row, meta) {
+                    return '<Button class="btn"><i class="fa-solid fa-circle-plus fa-flip-vertical" style="color: #000000;"></i></Button>'
+                }
+            },
+            {
+                data: 'Image',
+                render: function (data, type, row, meta) {
+                    return '<img src="/uploads/'+row.image+'" class="rounded-circle" height="50px;" width="50px" />'
+                }
+            },
+            {
+                data: 'First_Name',
+                render: function (data, type, row, meta) {
+                    return row.first_Name + " " + row.last_Name
+                }
+            },
+            {
+                data: 'email',
+                render: function (data, type, row, meta) {
+                    return row.email
+                }
+            },
+
+            {
+                data: 'Gender',
+                render: function (data, type, row, meta) {
+                    return row.gender
+                }
+            },
+             {
+                 data: 'Designation',
+                render: function (data, type, row, meta) {
+                    return row.designation
+                }
+            },
+            {
+                data: 'Action',
+                render: function (data, type, row, meta) {
+                    return '<a href="/employees/update/' + row.id + '"><i class="fa-solid fa-user-pen mx-3" style="color: #000000;"></i></a >' + " " + ' <a class="btn" onclick="deleteDailog(/employees/delete/' + row.id +')"> <i class="fa-solid fa-trash" style="color: #000000;"></i></a > ' 
+                }
+            }           
+        ]
+        
+    });
+}
 
 
