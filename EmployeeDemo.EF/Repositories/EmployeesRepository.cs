@@ -43,7 +43,7 @@ namespace EmployeeDemo.EF.Repositories
         }
 
         public async Task<List<Employee>> searchData(string empSearch)
-        {
+        {            
             return await dbContext.Employees.Where(x => x.First_Name.Contains(empSearch) || x.Last_Name.Contains(empSearch) || x.Email.Contains(empSearch)).Include(x => x.Skills).ToListAsync();
         }
 
@@ -57,7 +57,7 @@ namespace EmployeeDemo.EF.Repositories
         }
         public async Task<List<Skill>> getSkillsById(int id)
         {
-            return await dbContext.Skills.AsNoTracking().Where(x => x.EmployeeId == id).ToListAsync();
+            return await dbContext.Skills.AsNoTracking().Where(x => x.EmployeeId == id).ToListAsync();            
         }
         public async Task<List<Skill>> DeleteSkill(int id)
         {

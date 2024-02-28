@@ -81,8 +81,8 @@ function onSuccess(response) {
 }
 function format(d) {
     // `d` is the original data object for the row
-    return (
-       '<tr>'+        
+    return (       
+        '<tr>' +
         '<th>DOB:</th>' +
         '<td class="px-3">' + d.dob + '</td>' +
         '<th>Joining Date:</th>' +
@@ -91,7 +91,8 @@ function format(d) {
         '<td class="px-3">' + d.description + '</td>' +
         '<th>Skills:</th>' +
         '<td>'+d.skill_Name +'</td>' +
-        '</tr>'
+        '</tr>' 
+       
     );
 }
 
