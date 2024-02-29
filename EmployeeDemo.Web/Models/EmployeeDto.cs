@@ -29,7 +29,6 @@ namespace EmployeeDemo.Web.Models
         [Required]
         public string Designation { get; set; }
         [DisplayName("Image")]
-        [Required]
         public string? Image { get; set; }
         [DisplayName("Description")]
         [Required]

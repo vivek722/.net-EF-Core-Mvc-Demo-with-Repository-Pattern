@@ -107,7 +107,7 @@
                         @Html.LabelFor(Model => Model.Image)
                     </div>
                     <div class="col-md-9">
-                        @Html.HiddenFor(Model => Model.Image)
+                        @Html.HiddenFor(Model => Model.Image)                        
                         @Html.TextBoxFor(Model => Model.Image, null, new { Type = "file", @class = "form-control form-control-md", id = "uploadedImage" })
                         @Html.ValidationMessageFor(Model => Model.Image, "", new { @class = "text-danger" })
                     </div>

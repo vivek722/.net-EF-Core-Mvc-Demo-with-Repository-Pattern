@@ -70,13 +70,11 @@ namespace EmployeeDemo.Web.Controllers
         }
         //use to return data in textbox to delete
         [HttpPost]
-       public async Task<IActionResult> Upsert(EmployeeDto employeeViewModel, IFormFile? Image,int? id)
+        public async Task<IActionResult> Upsert(EmployeeDto employeeViewModel, IFormFile? Image, int? id)
         {
-            if(id == null || id == 0)
-            { 
-
-            if (Image != null)
+            if (id == null || id == 0)
             {
+
                 string upLoadFolder = Path.Combine(webHostEnvironment.WebRootPath, "uploads");
                 if (!Directory.Exists(upLoadFolder))
                 {
@@ -91,24 +89,25 @@ namespace EmployeeDemo.Web.Controllers
                 {
                     await Image.CopyToAsync(stream);
                 }
-            }
-            List<Skill> skillsList = new List<Skill>();
-            if (!string.IsNullOrEmpty(employeeViewModel.Skill_Name))
-            {
-                var skills = employeeViewModel.Skill_Name.Split(",");
-                foreach (var skill in skills)
+
+                List<Skill> skillsList = new List<Skill>();
+                if (!string.IsNullOrEmpty(employeeViewModel.Skill_Name))
                 {
-                    Skill skillData = new Skill();
-                    skillData.skill_name = skill.Trim();
-                    skillsList.Add(skillData);
+                    var skills = employeeViewModel.Skill_Name.Split(",");
+                    foreach (var skill in skills)
+                    {
+                        Skill skillData = new Skill();
+                        skillData.skill_name = skill.Trim();
+                        skillsList.Add(skillData);
+                    }
                 }
-            }
-            var employee = _mapper.Map<Employee>(employeeViewModel);
-            employee.Skills = skillsList;
-            _mapper.Map<EmployeeDto>(await employeesService.AddEmployee(employee));
-            //TempData["success"] = "Employee Data Insert Successfully";
-            //return Ok();
-            return RedirectToAction("Index");
+
+                var employee = _mapper.Map<Employee>(employeeViewModel);
+                employee.Skills = skillsList;
+                _mapper.Map<EmployeeDto>(await employeesService.AddEmployee(employee));
+                //TempData["success"] = "Employee Data Insert Successfully";
+                //return Ok();
+                return RedirectToAction("Index");
             }
             else
             {
@@ -132,11 +131,11 @@ namespace EmployeeDemo.Web.Controllers
                         {
                             await Image.CopyToAsync(stream);
                         }
-                    }
-                    else
-                    {
-                        employeeViewModel.Image = oldImage;
-                    }
+                    } 
+                }
+                else
+                {
+                    employeeViewModel.Image = oldImage;
                 }
                 if (!string.IsNullOrEmpty(employeeData.Skill_Name))
                 {
@@ -156,7 +155,7 @@ namespace EmployeeDemo.Web.Controllers
                 }
                 var employee = _mapper.Map<Employee>(employeeViewModel);
                 employee.Skills = skillsList;
-                _mapper.Map<EmployeeDto>(await employeesService.UpdateEmployee(id,employee));
+                _mapper.Map<EmployeeDto>(await employeesService.UpdateEmployee(id, employee));
                 //TempData["success"] = "Employee Data Update Successfully";
                 return RedirectToAction("Index");
             }
