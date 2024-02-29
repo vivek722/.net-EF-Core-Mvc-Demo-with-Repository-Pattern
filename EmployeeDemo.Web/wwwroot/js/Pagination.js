@@ -59,7 +59,7 @@ function onSuccess(response) {
             {
                 data: 'Action',
                 render: function (data, type, row, meta) {
-                    return '<a href="/employees/update/' + row.id + '"><i class="fa-solid fa-user-pen mx-3" style="color: #000000;"></i></a >' + " " + ' <a  class="btn" onclick="deleteDailog(/employees/delete/' + row.id +')"> <i class="fa-solid fa-trash" style="color: #000000;"></i></a > ' 
+                    return '<a href="/employees/upsert/' + row.id + '"><i class="fa-solid fa-user-pen mx-3" style="color: #000000;"></i></a >' + " " + ' <a  class="btn" onclick="deleteDailog(/employees/delete/' + row.id +')"> <i class="fa-solid fa-trash" style="color: #000000;"></i></a > ' 
                 }
             }           
         ]

@@ -1,15 +1,15 @@
 ﻿@using EmployeeDemo.Web.Models;
 @model EmployeeDto
-
 <form method="post" enctype="multipart/form-data">
+    @Html.HiddenFor(Model => Model.Id)
     @* <div class="modal" id="myModal">
     <div class="modal-dialog modal-lg"> *@
     <div class="modal-content">
 
         <!-- Modal Header -->
         <div class="modal-header">
-            <h4 class="modal-title">Update Empolyee</h4>
-            <button asp-controller="Employees" asp-action="Index" class="close" id="closeModel">&times;</button>
+            <h4 class="modal-title">@(Model != null?"Update":"Insert") Empolyee</h4>
+            <form method="get"><button asp-controller="Employees" asp-action="Index" class="close" id="closeModel">&times;</button></form>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-9">
                         @Html.EditorFor(Model => Model.First_Name)
-
+                        @Html.ValidationMessageFor(Model => Model.First_Name, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -32,6 +32,7 @@
                     </div>
                     <div class="col-md-9">
                         @Html.EditorFor(Model => Model.Last_Name)
+                        @Html.ValidationMessageFor(Model => Model.Last_Name, "", new { @class = "text-danger" })
 
                     </div>
                 </div>
@@ -44,7 +45,7 @@
                     </div>
                     <div class="col-md-9">
                         @Html.EditorFor(Model => Model.Email)
-
+                        @Html.ValidationMessageFor(Model => Model.Email, "", new { @class = "text-danger" })
                     </div>
 
                 </div>
@@ -56,6 +57,7 @@
                     <div class="col-md-9">
                         @Html.RadioButtonFor(Model => Model.Gender, "Male") Male
                         @Html.RadioButtonFor(Model => Model.Gender, "Female") Female
+                        @Html.ValidationMessageFor(Model => Model.Gender, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
@@ -68,7 +70,7 @@
                     </div>
                     <div class="col-md-9">
                         @Html.EditorFor(Model => Model.DOB)
-
+                        @Html.ValidationMessageFor(Model => Model.DOB, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -78,6 +80,7 @@
                     </div>
                     <div class="col-md-9">
                         @Html.EditorFor(Model => Model.JoiningDate)
+                        @Html.ValidationMessageFor(Model => Model.JoiningDate, "", new { @class = "text-danger" })
 
                     </div>
 
@@ -94,6 +97,7 @@
                         @Html.DropDownListFor(Model => Model.Designation,
                                  new SelectList(Enum.GetValues(typeof(Designation))),
                                  "--Please choose an Designation--")
+                        @Html.ValidationMessageFor(Model => Model.Designation, "", new { @class = "text-danger" })
 
                     </div>
                 </div>
@@ -105,63 +109,73 @@
                     <div class="col-md-9">
                         @Html.HiddenFor(Model => Model.Image)
                         @Html.TextBoxFor(Model => Model.Image, null, new { Type = "file", @class = "form-control form-control-md", id = "uploadedImage" })
+                        @Html.ValidationMessageFor(Model => Model.Image, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
             <div class="row mt-3 ">
                 <div class=" col-md-6">
                     <div class="col-md-12" id="img-div">
-                        <img src="~/uploads/@Model.Image" id="preview" alt="Image" style="width:150px; height:150px; margin-left:800px;">
+                        @if (Model != null)
+                        {
+                            <img src="~/uploads/@Model.Image" id="preview" alt="Image" style="width:150px; height:150px; margin-left:800px;">
+                        }
+                        else
+                        {
+                            <img src="" id="preview" alt="Image" style="width:150px; height:150px; margin-left:800px;">
+                        }
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="oneline col-md-6">
-                        <div class="col-md-3">
-                            <label for="">Skill</label>
-                        </div>
-                        <div class="col-md-9">
-                            <input placeholder="Enter your skills" type="text" name="skilldata" id="txtAddDataList">
-                            <input type="button" value="Add" id="btnAddDataList">
-                            @Html.HiddenFor(Model => Model.Skill_Name)
-                            <div>
-                                <ul class="text" id="skills">
-                                    @foreach (var item in Model.skillList)
-                                    {                                                                                
-                                        <script>skillAdd('@item')</script>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="oneline col-md-6">
-                        <div class="col-md-3">
-                            @Html.LabelFor(Model => Model.Description)
-                        </div>
-                        <div class="col-md-9">
-                            @Html.TextAreaFor(Model => Model.Description)
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary sucsess" id="saveData">Update changes</button>
-                    @* @Html.TextBox("btnSubmit", "save", new { type = "submit", @class = "btn btn-primary sucsess" })
-                    @* <input type="hidden" id="hiddenField" value=""> *@
-                    <button asp-controller="Employees" asp-action="Index" class="btn btn-danger close" id="closeModel">Close</button>
                 </div>
             </div>
+
+            <div class="row mt-3">
+                <div class="oneline col-md-6">
+                    <div class="col-md-3">
+                        <label for="">Skill</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input placeholder="Enter your skills" type="text" name="skilldata" id="txtAddDataList">
+                        <input type="button" value="Add" id="btnAddDataList">
+                        @Html.HiddenFor(Model => Model.Skill_Name)
+                        <div>
+                            <ul class="text" id="skills">
+                                @if (Model != null)
+                                                    {
+                                    @foreach (var item in Model.skillList)
+                                    {
+                                        <script>skillAdd('@item')</script>
+                                    }
+                                }                                                             
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="oneline col-md-6">
+                    <div class="col-md-3">
+                        @Html.LabelFor(Model => Model.Description)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(Model => Model.Description)
+                        @Html.ValidationMessageFor(Model => Model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">              
+                <button type="submit" class="btn btn-primary sucsess" id="saveData">@(Model != null?"Update":"Save") changes</button>               
+                <button asp-controller="Employees" asp-action="Index" class="btn btn-danger close" id="closeModel">Close</button>
+            </div>
         </div>
+
         @*     </div>
         </div>
         *@
 </form>
-
 @section scripts {
     <script src="~/js/imagepreview.js"></script>
+    <partial name="_ValidationScriptsPartial">
 }
-
-
-
 
 

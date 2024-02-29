@@ -33,7 +33,7 @@ namespace EmployeeDemo.EF.Repositories
             return employeeData;
 
         }
-        public async Task<Employee> GetEmployeeById(int id)
+        public async Task<Employee> GetEmployeeById(int? id)
         {
             return await dbContext.Employees.AsNoTracking().Include(x => x.Skills).Where(x => x.Id == id).FirstOrDefaultAsync();
         }
@@ -49,7 +49,7 @@ namespace EmployeeDemo.EF.Repositories
             return await dbContext.Employees.Where(x => x.First_Name.Contains(empSearch) || x.Last_Name.Contains(empSearch) || x.Email.Contains(empSearch)).Include(x => x.Skills).ToListAsync();
         }
 
-        public async Task<Employee> UpdateEmployee(int id, Employee employee)
+        public async Task<Employee> UpdateEmployee(int? id, Employee employee)
         {
             var EmployeesData = await GetEmployeeById(id);        
             employee.Id = EmployeesData.Id;
@@ -57,11 +57,11 @@ namespace EmployeeDemo.EF.Repositories
             await dbContext.SaveChangesAsync();
             return employee;
         }
-        public async Task<List<Skill>> getSkillsById(int id)
+        public async Task<List<Skill>> getSkillsById(int? id)
         {
             return await dbContext.Skills.AsNoTracking().Where(x => x.EmployeeId == id).ToListAsync();            
         }
-        public async Task<List<Skill>> DeleteSkill(int id)
+        public async Task<List<Skill>> DeleteSkill(int? id)
         {
             List<Skill> skillData = await getSkillsById(id);
             foreach (var skill in skillData)
