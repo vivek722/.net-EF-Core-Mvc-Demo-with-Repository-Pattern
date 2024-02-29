@@ -15,7 +15,7 @@ function dataTable() {
 function onSuccess(response) {  
     var table = $("#DataTable").DataTable({         
         bLengthChange: false,
-        lengthMenu: [[3, 5, 10, -1], [3, 5, 10, "All"]],     
+        lengthMenu: [[2, 5, -1], [3, 5,"All"]],     
         searching: false,      
         data: response,
         columns: [
