@@ -25,7 +25,7 @@
                 <a class="navbar-brand" href="#">Employees</a>
                 <form class="d-flex" role="search" id="modelForm">
                     <input class="form-control me-2" style="width: 300px; margin-left: 700px;" type="search" placeholder="Search Your Data" id="searchbar" name="searchData" aria-label="Search">
-                    <button class="btn btn-outline-success " type="submit" asp-controller="Employees" asp-action="Index" id="searchUserData"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i></button>                   
+                    <button class="btn btn-outline-success " type="submit" asp-controller="Employees" asp-action="getAll" id="searchUserData"><i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i></button>
                 </form>
                 <form>
                  <button asp-controller="Employees" asp-action="Insert" class="adduser ms-3" name="" style="width: 300px;" id="openModel"><i class="fa-solid fa-user-plus" style="color: #000000;"></i>  Add New Employee</button>

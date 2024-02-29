@@ -194,10 +194,17 @@ namespace EmployeeDemo.Web.Controllers
 
         #region API CALLS
         [HttpGet]
-        public async Task<IActionResult> getAll()
+        public async Task<IActionResult> getAll(string searchData)
         {
             var Employees = await employeesService.GetEmployees();
             var EmployeesMapper = _mapper.Map<List<EmployeeDto>>(Employees);
+
+            if (!searchData.IsNullOrEmpty())
+            {
+                Employees = await employeesService.searchData(searchData);
+                EmployeesMapper = _mapper.Map<List<EmployeeDto>>(Employees);
+                return new JsonResult(EmployeesMapper);
+            }
             return new JsonResult(EmployeesMapper);
         }
         #endregion
