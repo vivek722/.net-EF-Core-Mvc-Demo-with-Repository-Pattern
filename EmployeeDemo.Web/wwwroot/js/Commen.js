@@ -19,3 +19,23 @@
         }
     })
 }
+
+function ShowLoding() {
+    $(".loader").show();
+}
+function HideLoding() {
+    $(".loader").hide();
+}
+function ShowData() {
+    $("#Data").show();
+}
+$(window).on('beforeunload', function () {
+    ShowLoding();
+})
+$(document).on('submit', 'form', function () {
+    ShowLoding();
+})
+window.setTimeout(function () {
+    $(".loader").hide();
+    ShowData();
+}, 2000);

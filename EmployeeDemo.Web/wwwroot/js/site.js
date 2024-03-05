@@ -2,6 +2,28 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+function ShowLoding() {
+    $(".loader").show();
+}
+function HideLoding() {
+    $(".loader").hide();
+}
+function ShowData() {
+    $("#Data").show();
+}
+$(window).on('beforeunload', function () {
+    ShowLoding();
+})
+$(document).on('submit', 'form', function () {
+    ShowLoding();
+})
+window.setTimeout(function () {
+    $(".loader").hide();
+    ShowData();
+}, 2000);
+
+
 Skillarray = [];
 $("#btnAddDataList").click(function () {
     let dataList = $("#txtAddDataList").val();
@@ -23,3 +45,4 @@ function skillAdd(item) {
     Skillarray.push(dataList);
     $("#txtAddDataList").val("");
 }
+
